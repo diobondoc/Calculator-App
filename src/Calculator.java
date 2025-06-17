@@ -1,12 +1,14 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Calculator {
+public class Calculator implements ActionListener {
 
     JFrame window;
     JTextField text;
-    JButton [] buttons = new JButton[10];
+    JButton [] numButtons = new JButton[10];
     JButton[] functions = new JButton[8];
     JButton addition, subtraction, multiplication, division, decimal, equ, delete, clr;
     JPanel panel;
@@ -20,7 +22,7 @@ public class Calculator {
         window.setLayout(null);
 
         text = new JTextField();
-        text.setBounds(50,25,250,50);
+        text.setBounds(70,25,250,50);
         text.setEditable(false);
 
         addition = new JButton("+");
@@ -33,13 +35,30 @@ public class Calculator {
         clr = new JButton("Clear");
 
         functions[0] = addition;
-        functions[1] = addition;
-        functions[2] = addition;
-        functions[3] = addition;
-        functions[4] = addition;
-        functions[5] = addition;
-        functions[6] = addition;
+        functions[1] = subtraction;
+        functions[2] = multiplication;
+        functions[3] = division;
+        functions[4] = decimal;
+        functions[5] = equ;
+        functions[6] = delete;
+        functions[7] = clr;
 
+        for (int i = 0; i < 8; i++){
+            functions[i].addActionListener(this);
+            functions[i].setFocusable(false);
+        }
+
+        for (int i = 0; i < 10; i++){
+            numButtons[i] = new JButton(String.valueOf(i));
+            numButtons[i].addActionListener(this);
+            numButtons[i].setFocusable(false);
+        }
+
+        delete.setBounds(50,380,145,50);
+        clr.setBounds(205,380,145,50);
+
+        window.add(delete);
+        window.add(clr);
         window.add(text);
         window.setVisible(true);
     }
@@ -47,6 +66,11 @@ public class Calculator {
     public static void main(String[] args) {
         Calculator calc = new Calculator();
 
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }
