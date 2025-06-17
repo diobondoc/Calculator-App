@@ -23,6 +23,23 @@ public class Calculator {
         text.setBounds(50,25,250,50);
         text.setEditable(false);
 
+        addition = new JButton("+");
+        subtraction = new JButton("-");
+        multiplication = new JButton("*");
+        division = new JButton("/");
+        decimal = new JButton(".");
+        equ = new JButton("=");
+        delete = new JButton("Delete");
+        clr = new JButton("Clear");
+
+        functions[0] = addition;
+        functions[1] = addition;
+        functions[2] = addition;
+        functions[3] = addition;
+        functions[4] = addition;
+        functions[5] = addition;
+        functions[6] = addition;
+
         window.add(text);
         window.setVisible(true);
     }
