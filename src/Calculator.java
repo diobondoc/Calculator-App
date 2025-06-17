@@ -34,6 +34,7 @@ public class Calculator implements ActionListener {
         delete = new JButton("Delete");
         clr = new JButton("Clear");
 
+
         functions[0] = addition;
         functions[1] = subtraction;
         functions[2] = multiplication;
