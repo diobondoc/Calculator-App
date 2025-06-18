@@ -1,15 +1,15 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Calculator implements ActionListener {
 
     JFrame window;
     JTextField text;
-    JButton [] numButtons = new JButton[10];
-    JButton[] functions = new JButton[8];
+    ArrayList<JButton> numButtons = new ArrayList<>();
+    ArrayList<JButton> functions = new ArrayList<>();
     JButton addition, subtraction, multiplication, division, decimal, equ, delete, clr;
     JPanel panel;
 
@@ -25,39 +25,50 @@ public class Calculator implements ActionListener {
         text.setBounds(70,25,250,50);
         text.setEditable(false);
 
-        addition = new JButton("+");
-        subtraction = new JButton("-");
-        multiplication = new JButton("*");
-        division = new JButton("/");
-        decimal = new JButton(".");
-        equ = new JButton("=");
-        delete = new JButton("Delete");
-        clr = new JButton("Clear");
+        String[] funcTexts = {"+", "-", "*", "/", ".", "=", "Delete", "Clear"};
 
-
-        functions[0] = addition;
-        functions[1] = subtraction;
-        functions[2] = multiplication;
-        functions[3] = division;
-        functions[4] = decimal;
-        functions[5] = equ;
-        functions[6] = delete;
-        functions[7] = clr;
-
-        for (int i = 0; i < 8; i++){
-            functions[i].addActionListener(this);
-            functions[i].setFocusable(false);
+        for (String label : funcTexts){
+            JButton btn = new JButton(label);
+            btn.addActionListener(this);
+            btn.setFocusable(false);
+            functions.add(btn);
         }
 
         for (int i = 0; i < 10; i++){
-            numButtons[i] = new JButton(String.valueOf(i));
-            numButtons[i].addActionListener(this);
-            numButtons[i].setFocusable(false);
+            JButton btn = new JButton(String.valueOf(i));
+            btn.addActionListener(this);
+            btn.setFocusable(false);
+            numButtons.add(btn);
         }
 
-        delete.setBounds(50,380,145,50);
-        clr.setBounds(205,380,145,50);
+        delete = functions.get(6);
+        clr = functions.get(7);
 
+        delete.setBounds(50,400,145,50);
+        clr.setBounds(205,400,145,50);
+
+        panel = new JPanel();
+        panel.setBounds(50,90,300,300);
+        panel.setLayout(new GridLayout(4,4,10,10));
+
+        panel.add(numButtons.get(1));
+        panel.add(numButtons.get(2));
+        panel.add(numButtons.get(3));
+        panel.add(functions.get(0)); // addition
+        panel.add(numButtons.get(4));
+        panel.add(numButtons.get(5));
+        panel.add(numButtons.get(6));
+        panel.add(functions.get(1)); // subtraction
+        panel.add(numButtons.get(7));
+        panel.add(numButtons.get(8));
+        panel.add(numButtons.get(9));
+        panel.add(functions.get(2)); // multiplication
+        panel.add(functions.get(3)); // division
+        panel.add(functions.get(4)); // decimal
+        panel.add(numButtons.get(0));
+        panel.add(functions.get(5)); // equal
+
+        window.add(panel);
         window.add(delete);
         window.add(clr);
         window.add(text);
@@ -66,12 +77,10 @@ public class Calculator implements ActionListener {
 
     public static void main(String[] args) {
         Calculator calc = new Calculator();
-
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        // your action code here
     }
 }
